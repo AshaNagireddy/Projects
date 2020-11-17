@@ -1,0 +1,15 @@
+The program should provide the following functionality:
+
+1) You need to use special stock symbols in order to retrieve data from the api. You can allow the user to specify this information in one of two ways. The first is to provide a menu containing a list of common stocks the user can choose from for their analysis. The second is to provide a text box in which the user can enter the stock symbol. 
+
+2) Display the chosen stock's price and volume information (use the Quote Endpoint query) in an output message area. 
+
+3) There should be a button which when pressed will update all of the chosen stock's information by contacting the web site and downloading the relevant data. If the user entered an incorrect stock symbol, a popup message should be generated.
+
+4) Allow the user to specify whether they want to graph the current day's trading activity, or that of the current month. If the current day is chosen, use the Time_Series_Intraday query to get the last 100 data points for 5 minute intervals. Remove any data points not belonging to the current day. If the current month is chosen, use the Time_Series_Daily query to get the last 100 data points for daily entries. Remove any data points for trading days not in the current month.
+
+5) Allow the user to use radio buttons to specify which attribute of the stock you will graph in a Canvas object.
+
+6) When another button is pushed, you should graph the stock data for the chosen day or month. The horizontal axis should be either the hours of the day or the days of the month, while the vertical axis is either the stock price or trading volume value. You can draw lines to link all of the data values retrieved for the stock to make the plot. Use labels to identify the axes of the plotting.
+
+7) For extra credit you can present some other stock analysis information using other widgets or interaction types.
