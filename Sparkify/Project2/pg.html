@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Log data</title>
+</head>
+<body>
+<h1>Week 1 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(10)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 1 : Top 10 Artists</h1>
+<ol>
+{%for i in range(10,20)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+
+</ol>
+
+<h1>Week 2 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(20,30)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+
+</ol>
+
+<h1>Week2 : Top 10 Artists</h1>
+<ol>
+{%for i in range(30,40)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+
+</ol>
+<h1>Week 3 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(40,50)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 3 : Top 10 Artists</h1>
+<ol>
+{%for i in range(50,60)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+
+</ol>
+<h1>Week 4 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(60,70)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 4: Top 10 Artists</h1>
+<ol>
+{%for i in range(70,80)%}
+        <li>{{temp[i][0]}}</li>
+{%endfor%}
+
+</ol>
+</body>
+</html>

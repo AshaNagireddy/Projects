@@ -1,0 +1,149 @@
+Code to upload files to database:
+
+import pymongo
+import json
+import os
+
+client = pymongo.MongoClient('localhost', 27017)
+db = client.log_db
+week1 = db.log_col1
+week2 = db.log_col2
+week3 = db.log_col3
+week4 = db.log_col4
+
+
+for file in os.listdir('./'):
+    if file.endswith(".json"):
+        name = str(file)
+        date = int(name[8:10])
+        if 0<date<=7:
+            with open(file,'r') as f:
+                for line in f:
+                    obj = json.loads(line)
+                    db.week1.insert_one(obj)
+
+        elif 7<date<=14:
+            with open(file,'r') as f:
+                for line in f:
+                    obj = json.loads(line)
+                    db.week2.insert_one(obj)
+
+        elif 14<date<=21:
+            with open(file,'r') as f:
+                for line in f:
+                    obj = json.loads(line)
+                    db.week3.insert_one(obj)
+        else:
+            with open(file,'r') as f:
+                for line in f:
+                    obj = json.loads(line)
+                    db.week4.insert_one(obj)
+
+-------------------------------------------------------------
+flask application code:
+
+from flask import render_template
+import pymongo
+from pymongo import MongoClient
+from flask import Flask
+
+
+client = MongoClient ('localhost', 27017)
+db = client['log_db']
+log = db['coll']
+
+app = Flask(__name__)
+
+@app.route("/")
+
+def top10():
+    sw1 = list(db.week1.aggregate([{"$unwind": "$song"}, {"$sortByCount": "$song"}, { "$limit" : 10 }]))
+    aw1 = list(db.week1.aggregate([{"$unwind": "$artist"}, {"$sortByCount": "$artist"}, { "$limit" : 10 }]))
+    sw2 = list(db.week2.aggregate([{"$unwind": "$song"}, {"$sortByCount": "$song"}, { "$limit" : 10 }]))
+    aw2 = list(db.week2.aggregate([{"$unwind": "$artist"}, {"$sortByCount": "$artist"}, { "$limit" : 10 }]))
+    sw3 = list(db.week3.aggregate([{"$unwind": "$song"}, {"$sortByCount": "$song"}, { "$limit" : 10 }]))
+    aw3 = list(db.week3.aggregate([{"$unwind": "$artist"}, {"$sortByCount": "$artist"}, { "$limit" : 10 }]))
+    sw4 = list(db.week4.aggregate([{"$unwind": "$song"}, {"$sortByCount": "$song"}, { "$limit" : 10 }]))
+    aw4 = list(db.week4.aggregate([{"$unwind": "$artist"}, {"$sortByCount": "$artist"}, { "$limit" : 10 }]))
+    temp = sw1 + aw1 +sw2 + aw2+ sw3 + aw3 +sw4 + aw4
+    with app.app_context(), app.test_request_context():
+            template = render_template('index.html',temp=temp)
+    return template
+
+top10()
+
+------------------------------------------
+
+HTML template code:
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Log data</title>
+</head>
+<body>
+<h1>Week 1 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(10)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 1 : Top 10 Artists</h1>
+<ol>
+{%for i in range(10,20)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+
+</ol>
+
+<h1>Week 2 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(20,30)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week2 : Top 10 Artists</h1>
+<ol>
+{%for i in range(30,40)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+
+</ol>
+<h1>Week 3 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(40,50)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 3 : Top 10 Artists</h1>
+<ol>
+
+{%for i in range(50,60)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+
+</ol>
+<h1>Week 4 : Top 10 Songs</h1>
+<ol>
+
+{%for i in range(60,70)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+</ol>
+
+<h1>Week 4: Top 10 Artists</h1>
+<ol>
+{%for i in range(70,80)%}
+        <li>{{temp[i]['_id']}}</li>
+{%endfor%}
+
+</ol>
+</body>
+</html>
