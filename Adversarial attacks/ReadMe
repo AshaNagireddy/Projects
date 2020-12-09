@@ -1,0 +1,33 @@
+Objective:
+To implement “Adversarial Examples for Semantic Segmentation and Object Detection” and “DAPAS : Denoising Autoencoder to Prevent Adversarial attack in Semantic Segmentation” research papers and analyzing results from both implementations.
+DataSet:
+PASCAL VOC (https://www.kaggle.com/huanghanchina/pascal-voc-2012)
+This dataset provides standard image data sets for object class recognition.
+Research Papers:
+1. Adversarial Examples for Semantic Segmentation and Object Detection
+2. DAPAS : Denoising Autoencoder to Prevent Adversarial attack in Semantic Segmentation
+Introduction:
+Adversarial machine learning is a machine learning technique that attempts to fool models by supplying deceptive input. The most common reason is to cause a malfunction in a machine learning model. Most machine learning techniques were designed to work on specific problem sets in which the training and test data are generated from the same statistical distribution (IID). When those models are applied to the real world, adversaries may supply data that violates that statistical assumption. This data may be arranged to exploit specific vulnerabilities and compromise the results.
+Machine learning has advanced in all possible fields and is now growing vastly in security, health and finance domain. Security and privacy need to be improvised in ML. So, we learn about the system i.e being affected, Frontier i.e being approached with adversary to tweak the optimality for desired outputs.
+An Adversarial attack is also classified by the actions and information the adversary has at their disposal.
+These attacks can be classified into 
+WHITE BOX - information about the model parameters or its original training data. They have varying degrees of accessing the model as well as its parameters. The stronger the threat model is devastating the attacks would be.
+BLACK BOX - no knowledge about the model. The adversaries do not know the model internals. However, the black box threats are more realistic threat models as all it needs is the output responses to assume the model and parameters based on how it responds to the events.
+Untargeted Attack - is a source class misclassification attack, which aims to misclassify the input by adding adversarial perturbation so that the predicted class of the input is changed to some other classes without a specific target class. 
+Targeted Attack - is a source-target misclassification, which aims to misclassify the predicted class of an example input x to a targeted class in Y by purposely crafting the input example x via adversarial perturbation. As a result, the predicted class of the input x is covertly changed from the original class (source) to the specific target class intended by the attacker.
+In adversarial attacks, the following 2 steps are taken:
+•	The query input is changed from the benign input x to x’.
+•	An attack goal is set such that the prediction outcome, H(x) is no longer y. The loss is changed from l(H(x ᵢ), y ᵢ) to l(H(x ᵢ), y’ ᵢ) where y’ ᵢ ≠ y ᵢ.
+Adversarial Perturbation:
+An "adversarial perturbation" is a change to a physical object that is deliberately designed to fool a machine-learning system into mistaking it for something else. The query input is changed from x to x’ using adversarial perturbation.
+Methods:
+Semantic segmentation - Semantic segmentation, or image segmentation, is the task of clustering parts of an image together which belong to the same object class. It is a form of pixel-level prediction because each pixel in an image is classified according to a category.
+ 
+Object detection - Object detection is a computer technology related to computer vision and image processing that deals with detecting instances of semantic objects of a certain class in digital images and videos.
+ 
+Region Based Convolutional Neural Networks (R-CNN) : R-CNN uses an object proposal algorithm called Selective Search which reduces the number of bounding boxes that are fed to the classifier to close to 2000 region proposals. Selective search uses local cues like texture, intensity, color and/or a measure of insideness etc., to generate all the possible locations of the object. Now, we can feed these boxes to our CNN based classifier.
+Fast Gradient Sign Attack (FGSM) - It is designed to attack neural networks by leveraging the way they learn, gradients. The idea is simple, rather than working to minimize the loss by adjusting the weights based on the backpropagated gradients, the attack adjusts the input data to maximize the loss based on the same backpropagated gradients.
+ 
+Dense Advisory Generation (DAG): It is a simple algorithm for Adversarial example generation, which considers all the targets simultaneously and optimizes the overall loss function. The implementation of DAG involves specifying an adversarial label for each target and performing iterative gradient back-propagation.
+Denoising Autoencoder to Prevent Adversarial attack in Semantic Segmentation (DAPAS):
+DAPAS is a defense mechanism applied in front of a model against adversarial attacks. It is a denoise autoencoder to prevent an adversarial attack in semantic segmentation that effectively removes adversarial perturbation. Since semantic segmentation involves the classification of pixels, it is important to restore the original image at the pixel level so that the restored image gives the correct semantic segmentation result. We use random noise that follows a particular distribution like Gaussian distribution, Uniform distribution, and Bimodal distribution.
