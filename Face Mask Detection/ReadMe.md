@@ -47,3 +47,5 @@ This model has 22 layers in combination of convolution layers, Maxpool layers, F
 With Adam optimizer, we obtained the model accuracy of 94%.
 
 webcan live output - 
+
+![withoutmask](https://user-images.githubusercontent.com/70186062/101832031-c838b680-3b04-11eb-929e-cf95ef84ded4.jpg)                  ![with mask](https://user-images.githubusercontent.com/70186062/101832042-cff85b00-3b04-11eb-86a9-cc476741c112.jpg)
